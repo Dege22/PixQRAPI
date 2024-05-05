@@ -7,7 +7,7 @@ import sys
 import io
 import qrcode
 from fastapi.responses import FileResponse
-
+import os
 
 class PixData(BaseModel):
     chave_aleatoria: str
@@ -69,3 +69,7 @@ async def generate_pix(chave_aleatoria: str, nome_beneficiario: str, cidade_bene
 
 # Este script requer um servidor ASGI como o uvicorn para ser executado.
 # Exemplo de comando para executar: uvicorn nome_do_arquivo:app --reload
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
